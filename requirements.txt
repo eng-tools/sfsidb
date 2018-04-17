@@ -1,0 +1,5 @@
+numpy
+matplotlib
+engformat>=0.1.3
+signalpy>=0.4.8
+openpyxl
