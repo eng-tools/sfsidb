@@ -5,9 +5,9 @@ def get_surface_height(si):
     mtype = "ACC"
     if "ACCX" in si:  # support for old sensor files.
         mtype = "ACCX"
-    for i in range(1, len(si[mtype]) + 1):
-        if si[mtype][i]["Y-CODE"] == "S":
-            return si[mtype][i]["y"]
+    for m_number in si[mtype]:
+        if si[mtype][m_number]["Y-CODE"] == "S":
+            return si[mtype][m_number]["y"]
     return None
 
 

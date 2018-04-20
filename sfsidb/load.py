@@ -59,10 +59,10 @@ def get_mtype_and_number_from_code(si, sensor_code):
         mtype = mtype_and_ory[:-1]
     else:
         mtype = mtype_and_ory
-    for i in range(1, len(si[mtype]) + 1):
-        cc = get_sensor_code_by_number(si, mtype, i)
+    for m_number in si[mtype]:
+        cc = get_sensor_code_by_number(si, mtype, m_number)
         if cc == sensor_code:
-            return mtype, i
+            return mtype, m_number
     return None, None
 
 
