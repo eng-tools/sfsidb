@@ -1,0 +1,1 @@
+Old sensor file included the orientation in the sensor type.

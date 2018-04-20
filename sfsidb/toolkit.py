@@ -2,9 +2,12 @@ from sfsidb import load
 
 
 def get_surface_height(si):
-    for i in range(1, len(si["ACC"]) + 1):
-        if si["ACC"][i]["Y-CODE"] == "S":
-            return si["ACC"][i]["y"]
+    mtype = "ACC"
+    if "ACCX" in si:  # support for old sensor files.
+        mtype = "ACCX"
+    for i in range(1, len(si[mtype]) + 1):
+        if si[mtype][i]["Y-CODE"] == "S":
+            return si[mtype][i]["y"]
     return None
 
 

@@ -20,3 +20,15 @@ def test_get_depth_from_sensor_code():
     code = "ACCX-UB2-L2C-M"  # number = 4
     depth = toolkit.get_depth_by_code(si, code)
     assert ct.isclose(depth, 63.6)
+
+
+def test_old_style_sensor_code_file():
+    sensor_ffp = TEST_DATA_DIR + "test-old-sensor-file.json"
+    si = sfr.read_json_sensor_file(sensor_ffp)
+    sensor_code = "ACCX-NFF-L2C-M"
+    depth = toolkit.get_depth_by_code(si, sensor_code)
+    assert ct.isclose(depth, 63.6)
+
+
+if __name__ == '__main__':
+    test_old_style_sensor_code_file()

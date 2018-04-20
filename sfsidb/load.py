@@ -55,12 +55,13 @@ def get_mtype_and_number_from_code(si, sensor_code):
     :return:
     """
     mtype_and_ory, x, y, z = sensor_code.split("-")
-    if mtype_and_ory[-1] in "XYZ":
+    if mtype_and_ory[-1] in "XYZ" and "ACCX" not in si:  # Need to support old sensor_file.json files.
         mtype = mtype_and_ory[:-1]
     else:
         mtype = mtype_and_ory
     for i in range(1, len(si[mtype]) + 1):
-        if get_sensor_code_by_number(si, mtype, i) == sensor_code:
+        cc = get_sensor_code_by_number(si, mtype, i)
+        if cc == sensor_code:
             return mtype, i
     return None, None
 
