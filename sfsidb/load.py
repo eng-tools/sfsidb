@@ -145,7 +145,7 @@ def load_record_and_time(db_fp, local_path_ext, test_name, sensor_code, dbset, q
     if first:
         rec, dt = dbset.wild_load_record_and_dt(folder_path, test_name, sensor_code, quiet, first=first)
         if rec is None and quiet:
-            return None
+            return None, None
         time = np.arange(1, len(rec) + 1) * dt
         return rec, time
     else:

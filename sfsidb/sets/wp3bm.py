@@ -40,7 +40,7 @@ def wild_load_record_and_dt(folder_path, test_name, sensor_code, quiet=False, fi
     if first:
         if len(files) == 0:
             if quiet:
-                return None
+                return None, None  # Must return double None to be consistent
             else:
                 raise FileNotFoundError("No matching %s" % full_wild_file_path)
         full_file_path = files[0]
