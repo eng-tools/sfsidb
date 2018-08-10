@@ -66,6 +66,34 @@ def get_mtype_and_number_from_code(si, sensor_code):
     return None, None
 
 
+def get_all_sensor_codes(si, wild_sensor_code):
+    """
+    Get all sensor sensor_codes that match a wild sensor code
+
+    :param si: dict, sensor index json dictionary
+    :param wild_sensor_code: str, a sensor code with "*" for wildcards (e.g. ACCX-*-L2C-*)
+    :return:
+    """
+    mtype_and_ory, x, y, z = wild_sensor_code.split("-")
+    if mtype_and_ory == "*":
+        mtypes = list(si)
+    elif mtype_and_ory[-1] in "XYZ" and "ACCX" not in si:  # Need to support old sensor_file.json files.
+        mtypes = [mtype_and_ory[:-1]]
+    else:
+        mtypes = [mtype_and_ory]
+
+    all_sensor_codes = []
+    for mtype in mtypes:
+        for m_number in si[mtype]:
+            if x in ["*", si[mtype][m_number]['X-CODE']] and \
+                    y in ["*", si[mtype][m_number]['Y-CODE']] and \
+                    z in ["*", si[mtype][m_number]['Z-CODE']]:
+                cc = get_sensor_code_by_number(si, mtype, m_number)
+                all_sensor_codes.append(cc)
+
+    return all_sensor_codes
+
+
 def load_record(ffp, dbset, quiet=False):
     deprecation('Deprecated, switch to load_record_and_time, load_record_and_dt')
     # raise Warning("Deprecated, switch to load_record_and_time, load_record_and_dt")
